@@ -1,0 +1,75 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Client" parent="Theme.MaterialComponents.Light">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/base_gray</item>
+        <item name="colorPrimaryVariant">@color/base_black</item>
+        <item name="colorOnPrimary">@color/base_white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/base_white</item>
+        <item name="colorSecondaryVariant">@color/base_lightgray</item>
+        <item name="colorOnSecondary">@color/base_brown</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Client.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Client.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Client.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize25Percent" parent="">
+        <item name="cornerSize">25%</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize10Percent" parent="">
+        <item name="cornerSize">10%</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.SelectedCornerRadius20TRABL" parent="">
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeBottomLeft">20dp</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.SelectedCornerRadius20TRATL" parent="">
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.SelectedCornerRadius30TRATL" parent="">
+        <item name="cornerSizeTopRight">30dp</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerSizeTopLeft">30dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.SelectedCornerRadius30BR" parent="">
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerSizeBottomRight">30dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.SelectedCornerCut75" parent="">
+        <item name="cornerSizeBottomLeft">15dp</item>
+        <item name="cornerFamilyBottomLeft">cut</item>
+        <item name="cornerSizeTopLeft">15dp</item>
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerSizeBottomRight">15dp</item>
+        <item name="cornerFamilyBottomRight">cut</item>
+        <item name="cornerSizeTopRight">15dp</item>
+        <item name="cornerFamilyTopRight">cut</item>
+    </style>
+</resources>
