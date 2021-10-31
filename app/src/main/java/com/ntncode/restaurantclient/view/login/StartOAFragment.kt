@@ -17,21 +17,17 @@ import com.ntncode.restaurantclient.databinding.FragmentStartOauthBinding
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [StartOAFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class StartOAFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-
+    //[MAIN]
     private var _binding: FragmentStartOauthBinding? = null
-
     private val binding get() = _binding!!
 
+
+    //[ELEMENTS]
     private var btn_next: MaterialButton? = null
 
 
@@ -40,7 +36,7 @@ class StartOAFragment : Fragment() {
         btn_next = _binding?.btnNextOauth
     }
 
-    private fun initView() {
+    private fun initRes() {
 
     }
 
@@ -66,7 +62,7 @@ class StartOAFragment : Fragment() {
         _binding = FragmentStartOauthBinding.inflate(inflater, container, false)
 
         val window: Window = requireActivity().window
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        //WindowCompat.setDecorFitsSystemWindows(window, false)
         val wic = WindowCompat.getInsetsController(window, window.decorView)
         wic?.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_SWIPE
         wic?.isAppearanceLightStatusBars = true
@@ -80,7 +76,7 @@ class StartOAFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initBind()
-        initView()
+        initRes()
         initEvents()
     }
 

@@ -10,47 +10,69 @@ import android.view.Window
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ntncode.restaurantclient.adapter.ItemListOneDesignAdapter
 import com.ntncode.restaurantclient.api.RetrofitClient
-import com.ntncode.restaurantclient.data.Item
+import com.ntncode.restaurantclient.data.ItemData
 import com.ntncode.restaurantclient.databinding.FragmentHomeBinding
+import com.ntncode.restaurantclient.datastore.UserDataStore
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Response
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class HomeFragment : Fragment() {
 
+    //[MAIN]
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
-    private var _rv_itemlist: RecyclerView? = null
+    //[DATASTORE]
+    private lateinit var dataStoreUserManager: UserDataStore
 
-    val _listItemResponse = ArrayList<Item>()
+
+    //[ELEMENTS]
+    private var rvItemlist: RecyclerView? = null
+
+    val listItemResponse = ArrayList<ItemData>()
 
 
-    private fun initBinding() {
+    private fun initBind() {
 
-        _rv_itemlist = _binding?.rvItemslistHome
+        rvItemlist = _binding?.rvItemslistHome
 
     }
 
-    private fun initView() {
+    private fun initRes() {
 
         RetrofitClient.interceptor.level = HttpLoggingInterceptor.Level.BODY
 
-        _rv_itemlist?.layoutManager = StaggeredGridLayoutManager(2, 1)
+        dataStoreUserManager = UserDataStore(requireContext())
+
+        rvItemlist?.layoutManager = StaggeredGridLayoutManager(2, 1)
 
     }
 
     private fun initEvents() {
+
+        _binding?.ivProfileHome?.setOnClickListener {
+
+            var name: String? = null
+
+            dataStoreUserManager.getPhoneNumber.asLiveData().observe(requireActivity(), {
+                if (it != null) {
+                    Log.e("LOG_LISTITEM", "LOG RESULT: $it")
+                }
+            })
+
+            /*
+            lifecycleScope.launch {
+                name = dataStoreUserManager.getPhoneNumber()
+                Log.e("LOG_LISTITEM", "LOG RESULT: $name")
+            }*/
+
+        }
 
     }
 
@@ -62,7 +84,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val window: Window = requireActivity().window
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        //WindowCompat.setDecorFitsSystemWindows(window, false)
         val wic = WindowCompat.getInsetsController(window, window.decorView)
         wic?.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_SWIPE
         wic?.isAppearanceLightStatusBars = true
@@ -75,37 +97,37 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_HomeFragment_to_ProfileCustomerFragment2)
-        }*/
+/*binding.buttonFirst.setOnClickListener {
+findNavController().navigate(R.id.action_HomeFragment_to_ProfileCustomerFragment2)
+}*/
 
-        initBinding()
-        initView()
+        initBind()
+        initRes()
         initEvents()
 
         getListItems()
     }
 
 
-    fun getListItems() {
+    private fun getListItems() {
 
         val call = RetrofitClient.serviceApiUser.ItemList(14)
-        call.enqueue(object : retrofit2.Callback<List<Item>> {
+        call.enqueue(object : retrofit2.Callback<List<ItemData>> {
             override fun onResponse(
-                call: Call<List<Item>>,
-                response: Response<List<Item>>
+                call: Call<List<ItemData>>,
+                response: Response<List<ItemData>>
             ) {
                 if (response.isSuccessful) {
-                    val result: List<Item> = response.body()!!
-                    //Log.e("LOG_LISTITEM", "LOG RESULT:\n .${response.body().toString()} \nss")
+                    val result: List<ItemData> = response.body()!!
+
                     if (response.code() == 200) {
                         val adapter = ItemListOneDesignAdapter(result)
-                        _rv_itemlist?.adapter = adapter
+                        rvItemlist?.adapter = adapter
                     }
                 }
             }
 
-            override fun onFailure(call: Call<List<Item>>, t: Throwable) {
+            override fun onFailure(call: Call<List<ItemData>>, t: Throwable) {
 
                 Log.e("LOG_LISTITEM", "LOG RESULT:\n .${t.message} \nss")
             }

@@ -12,7 +12,6 @@ import com.ntncode.restaurantclient.databinding.ActivityOauthBinding
 
 class OAuthActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityOauthBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +19,6 @@ class OAuthActivity : AppCompatActivity() {
 
         binding = ActivityOauthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
 
     }
 

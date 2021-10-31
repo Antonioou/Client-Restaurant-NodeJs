@@ -13,7 +13,10 @@
         <action
             android:id="@+id/action_LoginOAFragment_to_ValidateOAFragment"
             app:destination ="@id/ValidateOAFragment"
-             />
+            >
+
+
+        </action>
         <action
             android:id="@+id/action_LoginOAFragment_to_startOAFragment"
             app:destination="@id/startOAFragment"
@@ -22,6 +25,15 @@
     </fragment>
 
     <!--
+
+<argument
+                android:name="verificationIdLoginArg"
+                app:argType="string"
+                android:defaultValue=""/>
+            <argument
+                android:name="numberPhoneLoginArg"
+                app:argType="string"
+                android:defaultValue="" />
 
     app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
@@ -35,7 +47,6 @@
         android:name="com.ntncode.restaurantclient.view.login.ValidateOAFragment"
         android:label="@string/validate_fragment_label"
         tools:layout="@layout/fragment_validate_oauth">
-
         <action
             android:id="@+id/action_ValidateOAFragment_to_LoginOAFragment2"
             app:destination="@id/LoginOAFragment"

@@ -2,7 +2,7 @@ package com.ntncode.restaurantclient.data
 
 import com.google.gson.annotations.SerializedName
 
-data class Item(
+data class ItemData(
     /*val server_code: String,
     val server_message: String? = null,*/
 

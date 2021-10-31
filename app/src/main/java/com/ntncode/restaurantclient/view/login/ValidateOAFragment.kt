@@ -1,10 +1,12 @@
 package com.ntncode.restaurantclient.view.login
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,25 +17,55 @@ import android.widget.Toast
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
 import com.ntncode.restaurantclient.R
 import com.ntncode.restaurantclient.databinding.FragmentValidateOauthBinding
+import com.ntncode.restaurantclient.datastore.UserDataStore
+import com.ntncode.restaurantclient.view.MainActivity
+import kotlinx.coroutines.launch
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class ValidateOAFragment : Fragment() {
 
+    //[MAIN]
     private var _binding: FragmentValidateOauthBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    //[Firebase]
+    private lateinit var auth: FirebaseAuth
+
+    //[DATASTORE]
+    private lateinit var dataStoreUserManager: UserDataStore
+
+    //[VARIABLE LOCAL]
+    private var storedVerificationId: String? = ""
+    private var numberPhone: String? = ""
+
+
+    private fun initBind() {
+
+    }
+
+    private fun initRes() {
+
+        auth = FirebaseAuth.getInstance()
+        dataStoreUserManager = UserDataStore(requireContext())
+
+    }
+
+    private fun initEvent() {
+
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentValidateOauthBinding.inflate(inflater, container, false)
 
@@ -51,12 +83,25 @@ class ValidateOAFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initBind()
+        initRes()
+        initEvent()
+
+        if (arguments != null) {
+            storedVerificationId = arguments?.getString("verificationId")
+            numberPhone = arguments?.getString("numberPhone")
+        } else {
+            Toast.makeText(requireContext(), "Nulo arg", Toast.LENGTH_SHORT).show()
+        }
+
+
+
         _binding?.fabBack?.setOnClickListener {
             findNavController().navigate(R.id.action_ValidateOAFragment_to_LoginOAFragment2)
         }
 
         _binding?.btnValidateOauth?.setOnClickListener {
-
+            verifyCode()
         }
 
         verificationOTP()
@@ -82,26 +127,74 @@ class ValidateOAFragment : Fragment() {
                     setProgressAnimate(_binding!!.enterProgressBar, 50)
                 } else if (_binding!!.idEnterCode.text.length == 6) {
                     setProgressAnimate(_binding!!.enterProgressBar, 60)
-                    val code: String?
-                    code = _binding?.idEnterCode!!.text.toString().trim()
-                    Toast.makeText(requireContext(), "" + code, Toast.LENGTH_SHORT).show()
                 }
             }
         })
-
-
     }
 
     fun setProgressAnimate(pb: ProgressBar, progressTo: Int) {
         val animation: ObjectAnimator = ObjectAnimator.ofInt(
-            pb, "progress", pb.progress, progressTo)
+            pb, "progress", pb.progress, progressTo
+        )
         animation.duration = 200
         animation.interpolator = DecelerateInterpolator()
         animation.start()
     }
 
+    private fun verifyCode() {
+        val code: String?
+        code = _binding?.idEnterCode!!.text.toString().trim()
+
+        if (code.length == 6) {
+            if (storedVerificationId?.isNotEmpty() == true)
+                verifyPhoneNumberWithCode(storedVerificationId, code)
+        } else {
+            Toast.makeText(requireContext(), "Ingrese el código recibido.", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
+    private fun verifyPhoneNumberWithCode(verificationId: String?, code: String) {
+        // [START verify_with_code]
+        val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
+        // [END verify_with_code]
+        signInWithPhoneAuthCredential(credential)
+    }
+
+    // [START sign_in_with_phone]
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+
+                    Log.d(TAG, "signInWithCredential:success")
+                    val user = task.result?.user
+                    val currentUser: String? = auth.uid
+
+                    lifecycleScope.launch {
+                        dataStoreUserManager.setPhoneNumber("99992222")
+                    }
+
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                    activity?.finish()
+                } else {
+
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        // The verification code entered was invalid
+                    }
+
+                }
+            }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    companion object {
+        private const val TAG = "ValdiateOAFragment"
     }
 }
