@@ -62,7 +62,7 @@
         <item name="cornerSizeBottomRight">30dp</item>
     </style>
 
-    <style name="ShapeAppearanceOverlay.App.SelectedCornerCut75" parent="">
+    <style name="ShapeAppearanceOverlay.App.SelectedCornerCut15" parent="">
         <item name="cornerSizeBottomLeft">15dp</item>
         <item name="cornerFamilyBottomLeft">cut</item>
         <item name="cornerSizeTopLeft">15dp</item>
@@ -71,5 +71,23 @@
         <item name="cornerFamilyBottomRight">cut</item>
         <item name="cornerSizeTopRight">15dp</item>
         <item name="cornerFamilyTopRight">cut</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.SelectedCornerCu10" parent="">
+        <item name="cornerSizeBottomLeft">10dp</item>
+        <item name="cornerFamilyBottomLeft">cut</item>
+        <item name="cornerSizeTopLeft">10dp</item>
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerSizeBottomRight">10dp</item>
+        <item name="cornerFamilyBottomRight">cut</item>
+        <item name="cornerSizeTopRight">10dp</item>
+        <item name="cornerFamilyTopRight">cut</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.SelectedCornerCu10TLABR" parent="">
+        <item name="cornerSizeTopLeft">14dp</item>
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerSizeBottomRight">14dp</item>
+        <item name="cornerFamilyBottomRight">cut</item>
     </style>
 </resources>

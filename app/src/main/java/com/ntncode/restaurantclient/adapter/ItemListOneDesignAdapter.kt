@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ntncode.restaurantclient.R
-import com.ntncode.restaurantclient.data.ItemData
+import com.ntncode.restaurantclient.model.ItemData
 
 class ItemListOneDesignAdapter(private val mList: List<ItemData>) :
     RecyclerView.Adapter<ItemListOneDesignAdapter.ViewHolder>() {

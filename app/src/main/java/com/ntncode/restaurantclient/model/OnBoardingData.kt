@@ -1,7 +1,4 @@
-package com.ntncode.restaurantclient.data
-
-import android.graphics.drawable.Drawable
-import com.ntncode.restaurantclient.R
+package com.ntncode.restaurantclient.model
 
 data class OnBoardingData(
     val title: String,

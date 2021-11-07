@@ -16,4 +16,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_oauth">OAuthActivity</string>
+
+    <!-- LOGIN STRING -->
+    <string name="status_allowed">allowed</string>
+    <string name="status_denied">denied</string>
+    <string name="status_ob_no">no</string>
+    <string name="status_ob_yes">yes</string>
+
+    <!-- DIALOG ONE STYLE -->
+    <string name="title_login_dialog">¡Al parecer aún no has iniciado sesión!</string>
+    <string name="message_login_dialog">Ingresa para acceder a distint1as funciones exclusivas que tenemos para usted</string>
+    <string name="positive_button_login_dialog">Iniciar sesión</string>
+    <string name="negative_button_login_dialog">Más tarde</string>
+
 </resources>

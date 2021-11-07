@@ -1,6 +1,6 @@
 package com.ntncode.restaurantclient.api
 
-import com.ntncode.restaurantclient.data.ItemData
+import com.ntncode.restaurantclient.model.ItemData
 import retrofit2.Call
 import retrofit2.http.*
 

@@ -1,4 +1,4 @@
-package com.ntncode.restaurantclient.datastore
+package com.ntncode.restaurantclient.data.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore

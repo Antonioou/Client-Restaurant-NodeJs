@@ -1,4 +1,4 @@
-package com.ntncode.restaurantclient.data
+package com.ntncode.restaurantclient.model
 
 import com.google.gson.annotations.SerializedName
 

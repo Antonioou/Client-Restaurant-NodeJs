@@ -1,29 +1,67 @@
 package com.ntncode.restaurantclient.view.init
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.ntncode.restaurantclient.R
 import com.ntncode.restaurantclient.adapter.OnBoardingPagerAdapter
-import com.ntncode.restaurantclient.data.OnBoardingData
+import com.ntncode.restaurantclient.model.OnBoardingData
+import com.ntncode.restaurantclient.data.datastore.LoginDataStore
+import com.ntncode.restaurantclient.data.sp.SessionSP
+import com.ntncode.restaurantclient.view.MainActivity
+import kotlinx.coroutines.launch
 
 class OnBoardingActivity : AppCompatActivity() {
 
+    //[DATA STORE]
+    //private lateinit var loginDS: LoginDataStore
 
+    //[ELEMENTS]
     private lateinit var viewPager2: ViewPager2
+
+    //[VARIABLES]
+    //var state_login: String = ""
+
 
 
     //https://kotlincodes.com/kotlin/viewpager-in-kotlin-android/
-    //https://chjune0205.tistory.com/entry/%EC%84%B8%EB%A1%9C-%EB%B0%A9%ED%96%A5-%EB%B7%B0%ED%8E%98%EC%9D%B4%EC%A0%80-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-Vertical-ViewPager-Kotlin?category=900789?category=900789
+
+    //https://chjune0205.tistory.com/entry/%EC%84%B8%EB%A1%9C-
+    // %EB%B0%A9%ED%96%A5-%EB%B7%B0%ED%8E%98%EC%9D%B4%EC%A0%80-%EC%A0%81%EC%9A%A9%E
+    // D%95%98%EA%B8%B0-Vertical-ViewPager-Kotlin?category=900789?category=900789
+
     //https://intensecoder.com/android-swipe-views-using-viewpager2-tutorial-in-kotlin/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_on_boarding)
+
+
+        //loginDS = LoginDataStore(this.applicationContext)
+
+        validateOBStatus()
+
+        /*lifecycleScope.launch {
+            var a = loginDS.getStateNormal()
+            if (a != null) {
+                validateLoginStatus(a)
+            }
+        }
+
+        loginDS.getState.asLiveData().observe(this, {
+            if (it != null) {
+                validateLogin(it)
+            }
+        })*/
+
 
         /*val viewPager = findViewById<ViewPager>(R.id.viewPager_onBoarding)
         viewPager.adapter = OnBoardingPagerAdapter(supportFragmentManager)
@@ -32,7 +70,7 @@ class OnBoardingActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)*/
 
         val window: Window = window
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        //WindowCompat.setDecorFitsSystemWindows(window, false)
         val wic = WindowCompat.getInsetsController(window, window.decorView)
         wic?.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_SWIPE
         wic?.isAppearanceLightStatusBars = true
@@ -59,4 +97,29 @@ class OnBoardingActivity : AppCompatActivity() {
         viewPager2.adapter = adapter
 
     }
+
+    private fun validateOBStatus() {
+
+        val sharedPreference = SessionSP(this)
+
+        var state_session = sharedPreference.getStateOnBoarding()
+
+        //Toast.makeText(applicationContext, "status: $state_login", Toast.LENGTH_SHORT).show()
+
+        if (state_session.equals(getString(R.string.status_ob_yes))) {
+
+            Log.e("log_states_session", "ONBOARDING")
+
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+            finishAffinity()
+
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
+
 }

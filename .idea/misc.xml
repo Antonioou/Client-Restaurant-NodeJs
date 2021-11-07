@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Desarrollo/Kotlin/RestaurantBase/Client/app/src/main/res/drawable/expression_edit_text_bgc.xml" value="0.22083333333333333" />
         <entry key="..\:/Desarrollo/Kotlin/RestaurantBase/Client/app/src/main/res/drawable/ic_outline_shopping_cart_24.xml" value="0.22083333333333333" />
+        <entry key="..\:/Desarrollo/Kotlin/RestaurantBase/Client/app/src/main/res/drawable/popup_rounded_corner.xml" value="0.2169230769230769" />
         <entry key="..\:/Desarrollo/Kotlin/RestaurantBase/Client/app/src/main/res/layout/activity_main.xml" value="0.2046875" />
         <entry key="..\:/Desarrollo/Kotlin/RestaurantBase/Client/app/src/main/res/layout/activity_oauth.xml" value="0.33" />
         <entry key="..\:/Desarrollo/Kotlin/RestaurantBase/Client/app/src/main/res/layout/activity_on_boarding.xml" value="0.2046875" />
@@ -21,6 +22,7 @@
         <entry key="..\:/Desarrollo/Kotlin/RestaurantBase/Client/app/src/main/res/layout/fragment_validate_oauth.xml" value="0.25" />
         <entry key="..\:/Desarrollo/Kotlin/RestaurantBase/Client/app/src/main/res/layout/item_product_one_design.xml" value="0.33" />
         <entry key="..\:/Desarrollo/Kotlin/RestaurantBase/Client/app/src/main/res/layout/item_viewpager2_ob.xml" value="0.25" />
+        <entry key="..\:/Desarrollo/Kotlin/RestaurantBase/Client/app/src/main/res/layout/popup_signin.xml" value="0.33" />
         <entry key="..\:/Desarrollo/Kotlin/RestaurantBase/Client/app/src/main/res/menu/menu_main.xml" value="0.2046875" />
       </map>
     </option>

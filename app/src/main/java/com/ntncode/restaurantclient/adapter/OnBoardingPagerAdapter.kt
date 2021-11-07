@@ -3,6 +3,7 @@ package com.ntncode.restaurantclient.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,49 +13,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.ntncode.restaurantclient.R
-import com.ntncode.restaurantclient.data.OnBoardingData
+import com.ntncode.restaurantclient.data.sp.SessionSP
+import com.ntncode.restaurantclient.model.OnBoardingData
 import com.ntncode.restaurantclient.view.MainActivity
-import com.ntncode.restaurantclient.view.login.OAuthActivity
-
-/*class OnBoardingPagerAdapter(fm:FragmentManager) : FragmentPagerAdapter(fm) {
-    override fun getCount(): Int {
-        return 3;
-    }
-
-    override fun getItem(position: Int): Fragment {
-        when(position) {
-            0 -> {
-                return OneOBFragment()
-            }
-            1 -> {
-                return TwoOBFragment()
-            }
-            2 -> {
-                return ThreeOBFragment()
-            }
-            else -> {
-                return OneOBFragment()
-            }
-        }
-    }
-
-    /*override fun getPageTitle(position: Int): CharSequence? {
-        when(position) {
-            0 -> {
-                return "Tab 1"
-            }
-            1 -> {
-                return "Tab 2"
-            }
-            2 -> {
-                return "Tab 3"
-            }
-        }
-        return super.getPageTitle(position)
-    }*/
-
-}
- */
 
 class OnBoardingPagerAdapter(
 
@@ -119,9 +80,17 @@ class OnBoardingPagerAdapter(
 
             iv_icon.setOnClickListener {
 
-                val intent: Intent = Intent(context, MainActivity::class.java)
+                val sharedPreference: SessionSP = SessionSP(context.applicationContext)
+                var state_sesion = sharedPreference.getStateOnBoarding()
+
+                if (state_sesion.equals(context.getString(R.string.status_ob_no)))
+                    sharedPreference.setStateOnBoarding(context.getString(R.string.status_ob_yes))
+
+                val intent = Intent(context, MainActivity::class.java)
                 context.startActivity(intent)
-                (context as Activity).finish()
+                (context as Activity).finishAffinity()
+
+
             }
 
         }

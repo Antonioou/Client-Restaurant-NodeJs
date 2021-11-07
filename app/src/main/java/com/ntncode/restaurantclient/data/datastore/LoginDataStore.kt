@@ -1,4 +1,4 @@
-package com.ntncode.restaurantclient.datastore
+package com.ntncode.restaurantclient.data.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 class LoginDataStore(private val context: Context) {
@@ -33,9 +34,9 @@ class LoginDataStore(private val context: Context) {
         }
     }
 
-    suspend fun setState(phone: String) {
+    suspend fun setState(state: String) {
         context.dataStore.edit {
-            it[STATE] = phone
+            it[STATE] = state
         }
     }
 
@@ -47,9 +48,15 @@ class LoginDataStore(private val context: Context) {
 
     // ************************ GET METHODS ***********************************
 
-    val getState: Flow<String?> = context.dataStore.data.map {
+    /*val getState: Flow<String?> = context.dataStore.data.map {
         it[STATE] ?: "denied"
+    }*/
+
+    suspend fun getStateNormal(): String? {
+        val preferences: Preferences = context.dataStore.data.first()
+        return preferences[STATE]
     }
+
 
     val getDate: Flow<String?> = context.dataStore.data.map {
         it[DATE]

@@ -25,7 +25,7 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import com.ntncode.restaurantclient.R
 import com.ntncode.restaurantclient.databinding.FragmentValidateOauthBinding
-import com.ntncode.restaurantclient.datastore.UserDataStore
+import com.ntncode.restaurantclient.data.datastore.UserDataStore
 import com.ntncode.restaurantclient.view.MainActivity
 import kotlinx.coroutines.launch
 
@@ -171,9 +171,9 @@ class ValidateOAFragment : Fragment() {
                     val user = task.result?.user
                     val currentUser: String? = auth.uid
 
-                    lifecycleScope.launch {
+                    /*lifecycleScope.launch {
                         dataStoreUserManager.setPhoneNumber("99992222")
-                    }
+                    }*/
 
                     startActivity(Intent(requireContext(), MainActivity::class.java))
                     activity?.finish()
