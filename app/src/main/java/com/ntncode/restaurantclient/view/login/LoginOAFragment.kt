@@ -15,6 +15,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.FirebaseException
@@ -22,6 +23,9 @@ import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.ntncode.restaurantclient.R
 import com.ntncode.restaurantclient.databinding.FragmentLoginOauthBinding
+import com.ntncode.restaurantclient.util.dialogs.LoadStyleAlertDialog
+import com.ntncode.restaurantclient.util.dialogs.SimpleStyleAlertDialog
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class LoginOAFragment : Fragment() {
@@ -31,7 +35,7 @@ class LoginOAFragment : Fragment() {
     private val binding get() = _binding!!
 
     //[fIREBASE]
-    var auth: FirebaseAuth? = null
+    private var auth: FirebaseAuth? = null
 
     //[VARIABLE METHOD'S]
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
@@ -43,6 +47,8 @@ class LoginOAFragment : Fragment() {
     //[ELEMENTS VIEW]
     private var btn_signin: MaterialButton? = null
     private var et_number: EditText? = null
+
+    private lateinit var dialog: LoadStyleAlertDialog
 
 
     private fun initBind() {
@@ -66,6 +72,7 @@ class LoginOAFragment : Fragment() {
 
         btn_signin?.setOnClickListener {
             validatePhone()
+            //showDialog()
         }
     }
 
@@ -77,7 +84,7 @@ class LoginOAFragment : Fragment() {
         _binding = FragmentLoginOauthBinding.inflate(inflater, container, false)
 
         val window: Window = requireActivity().window
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        //WindowCompat.setDecorFitsSystemWindows(window, false)
         val wic = WindowCompat.getInsetsController(window, window.decorView)
         wic?.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_SWIPE
         wic?.isAppearanceLightStatusBars = true
@@ -106,6 +113,9 @@ class LoginOAFragment : Fragment() {
                 //     user action.
                 Log.d(ContentValues.TAG, "onVerificationCompleted:$credential")
                 //signInWithPhoneAuthCredential(credential)
+                btn_signin?.isEnabled = true
+                et_number?.isEnabled=true
+                _binding?.fabBack?.isEnabled = true
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
@@ -115,11 +125,32 @@ class LoginOAFragment : Fragment() {
 
                 if (e is FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
+                    Toast.makeText(
+                        requireContext(),
+                        "Solicitud Inválida. Intente más tarde.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else if (e is FirebaseTooManyRequestsException) {
                     // The SMS quota for the project has been exceeded
+                    Toast.makeText(
+                        requireContext(),
+                        "Excedió las solicitudes. Intente más tarde.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+
                 }
 
+                btn_signin?.isEnabled = true
+                et_number?.isEnabled=true
+                _binding?.fabBack?.isEnabled = true
+
                 // Show a message and update the UI
+                Toast.makeText(
+                    requireContext(),
+                    "Solicitud Fallida. Intente más tarde.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
             override fun onCodeSent(
@@ -134,8 +165,10 @@ class LoginOAFragment : Fragment() {
                 // Save verification ID and resending token so we can use them later
                 storedVerificationId = verificationId
                 resendToken = token
+                lifecycleScope.launch {
+                    fragmentNavigation()
+                }
 
-                fragmentNavigation()
             }
         }
     }
@@ -148,11 +181,11 @@ class LoginOAFragment : Fragment() {
         if (!TextUtils.isEmpty(phone)) {
             if (phone.length == 9) {
 
-                btn_signin?.setEnabled(false)
-                et_number?.setEnabled(false)
-                et_number?.setError(null)
-                sendVerificationCode("+51$phone")
+                btn_signin?.isEnabled = false
+                et_number?.isEnabled = false
+                _binding?.fabBack?.isEnabled = false
 
+                showDialog(phone)
             } else {
                 et_number?.setError("Número erroneo")
                 Toast.makeText(requireContext(), "Número de celular incorrecto", Toast.LENGTH_SHORT)
@@ -182,15 +215,25 @@ class LoginOAFragment : Fragment() {
         }
     }
 
+    private fun showDialog(phone: String) {
+
+        dialog = LoadStyleAlertDialog(requireContext(), false).apply {
+            set(
+                message = getString(R.string.message_wait_dialog)
+            )
+        }
+        dialog.show()
+        sendVerificationCode("+51$phone")
+    }
+
 
     private fun fragmentNavigation() {
 
+        dialog.dismiss()
+
         val number = et_number?.text.toString().trim { it <= ' ' }
-
-
         val bundle = bundleOf("numberPhone" to number, "verificationId" to storedVerificationId)
         findNavController().navigate(R.id.action_LoginOAFragment_to_ValidateOAFragment, bundle)
-
 
         /*findNavController().navigate(LoginOAFragmentDirections.actionLoginOAFragmentToValidateOAFragment()
                 .setNumberPhoneLoginArg(number)

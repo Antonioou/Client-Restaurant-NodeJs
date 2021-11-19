@@ -22,7 +22,7 @@ import com.ntncode.restaurantclient.data.datastore.UserDataStore
 import com.ntncode.restaurantclient.data.sp.SessionSP
 import com.ntncode.restaurantclient.databinding.FragmentHomeBinding
 import com.ntncode.restaurantclient.model.ItemData
-import com.ntncode.restaurantclient.util.OneStyleAlertDialog
+import com.ntncode.restaurantclient.util.dialogs.ConfirmationStyleAlertDialog
 import com.ntncode.restaurantclient.view.login.OAuthActivity
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -102,7 +102,7 @@ class HomeFragment : Fragment() {
         initRes()
 
         lifecycleScope.launchWhenCreated {
-            asignValueSesson(sessionSP.getStateSession())
+            asignValueSession(sessionSP.getStateSession())
         }
 
         initEvents()
@@ -111,19 +111,18 @@ class HomeFragment : Fragment() {
         getListItems()
     }
 
-    private fun asignValueSesson(state: String?) {
+    private fun asignValueSession(state: String?) {
         state_session = state ?: getString(R.string.status_denied)
     }
 
     private fun dialogSignSuggestion() {
 
-        val dialog = OneStyleAlertDialog(requireContext()).apply {
+        val dialog = ConfirmationStyleAlertDialog(requireContext(), true).apply {
             set(
                 title = getString(R.string.title_login_dialog),
                 message = getString(R.string.message_login_dialog),
                 negativeButtonText = getString(R.string.negative_button_login_dialog),
                 negativeButtonListener = {
-                    //Toast.makeText(requireContext(), "Negative button", Toast.LENGTH_SHORT).show()
                     dismiss()
                 },
                 positiveButtonText = getString(R.string.positive_button_login_dialog),
@@ -136,10 +135,9 @@ class HomeFragment : Fragment() {
         dialog.show()
     }
 
-
     private fun getListItems() {
-
-        val call = RetrofitClient.serviceApiUser.ItemList(14)
+        //Log.e("LOG_LISTITEM", "INIT LIST")
+        val call = RetrofitClient.serviceApiUser.getItemList(14)
         call.enqueue(object : retrofit2.Callback<List<ItemData>> {
             override fun onResponse(
                 call: Call<List<ItemData>>,
@@ -148,7 +146,9 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful) {
                     val result: List<ItemData> = response.body()!!
 
+                    //Log.e("LOG_LISTITEM", "LOG RESULT: $result")
                     if (response.code() == 200) {
+
                         val adapter = ItemListOneDesignAdapter(result)
                         rvItemlist?.adapter = adapter
                     }
@@ -156,7 +156,6 @@ class HomeFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<ItemData>>, t: Throwable) {
-
                 Log.e("LOG_LISTITEM", "LOG RESULT:\n .${t.message} \nss")
             }
         })

@@ -36,7 +36,7 @@ class SessionSP(val context: Context) {
         return sharedPref.getString(STATE_VALUE, context.getString(R.string.status_denied))
     }
 
-    fun logoutSession() {
+    fun logOutSession() {
         val editor: SharedPreferences.Editor = sharedPref.edit()
         editor.putString(STATE_VALUE, context.getString(R.string.status_denied))
         editor.apply()

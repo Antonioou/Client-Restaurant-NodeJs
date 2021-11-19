@@ -59,8 +59,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcv_section_otp"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="5dp"
@@ -70,7 +70,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@color/base_darkgray">
 
@@ -82,8 +82,6 @@
                 android:layout_alignBottom="@+id/idEnterCode"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
                 android:max="60"
                 android:progressBackgroundTint="@android:color/transparent"
                 android:progressTint="@color/base_brown" />
@@ -91,19 +89,20 @@
             <EditText
                 android:id="@+id/idEnterCode"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/expression_edit_text_bgc"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/edittext_otp_bg"
                 android:cursorVisible="false"
                 android:imeOptions="flagNoFullscreen|actionDone"
                 android:inputType="number"
-                android:letterSpacing="1.50"
+                android:letterSpacing="1.1"
                 android:maxLength="6"
+                android:textAlignment="center"
                 android:textIsSelectable="false"
-                android:textSize="22dp"
-                tools:ignore="SpUsage" />
+                android:textSize="22sp" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -136,7 +135,7 @@
         android:text="Validar"
         android:textAllCaps="false"
         android:textSize="16sp"
-        app:backgroundTint="@color/base_brown"
+        app:backgroundTint="@color/base_black_mate"
         app:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

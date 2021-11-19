@@ -1,11 +1,11 @@
-package com.ntncode.restaurantclient.util
+package com.ntncode.restaurantclient.util.dialogs
 
 import android.app.AlertDialog
 import android.content.Context
 import androidx.core.content.ContextCompat
 import com.ntncode.restaurantclient.R
 
-class OneStyleAlertDialog(context: Context) {
+class ConfirmationStyleAlertDialog(context: Context, isCancelable: Boolean) {
 
 
     //[SOURCE]
@@ -17,7 +17,7 @@ class OneStyleAlertDialog(context: Context) {
 
     private val alertDialog: AlertDialog by lazy {
         AlertDialog.Builder(context)
-            .setCancelable(true)
+            .setCancelable(isCancelable)
             .create().apply {
                 val backgroundDrawable =
                     ContextCompat.getDrawable(context, R.drawable.popup_rounded_corner)
@@ -35,7 +35,7 @@ class OneStyleAlertDialog(context: Context) {
         negativeButtonListener: ButtonListener? = null,
         positiveButtonText: String? = null,
         positiveButtonListener: ButtonListener? = null
-    ): OneStyleAlertDialog {
+    ): ConfirmationStyleAlertDialog {
         oneStyleDialogView.set(
             title,
             message,
@@ -57,6 +57,4 @@ class OneStyleAlertDialog(context: Context) {
     fun dismiss() {
         alertDialog.dismiss()
     }
-
-    // Here will be the custom view as private inner class
 }

@@ -1,6 +1,6 @@
-package com.ntncode.restaurantclient.data.datastore
+package com.ntncode.restaurantclient.model
 
-data class UserDSModel(
+data class UserData(
     val firstName : String,
     val lastName: String,
     val uid: String,

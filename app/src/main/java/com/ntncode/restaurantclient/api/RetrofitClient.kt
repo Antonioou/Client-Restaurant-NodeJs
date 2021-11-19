@@ -8,11 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
-    var interceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-        override fun log(message: String) {
-            Log.e("", message)
-        }
-    })
+    var interceptor = HttpLoggingInterceptor { message -> Log.e("", message) }
 
     private var client = OkHttpClient.Builder()
         .connectTimeout(45, TimeUnit.SECONDS) //5->10->15 다

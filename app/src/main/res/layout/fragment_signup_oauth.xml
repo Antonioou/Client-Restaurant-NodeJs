@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".view.login.SignUpOAFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
+            android:text="Registre su nueva cuenta"
+            android:textColor="@color/base_black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/mcv_section_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_section_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="15dp"
+            app:cardBackgroundColor="@color/base_black"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:layout_constraintBottom_toTopOf="@id/et_firstname_signup_oa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_title">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_profile_signup_oa"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@color/base_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize25Percent" />
+
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choosePhotoProfile"
+                    android:textAllCaps="false"
+                    app:elevation="0dp"
+                    app:icon="@drawable/ic_outline_edit_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_profile_signup_oa"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:rippleColor="@color/base_gray" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <EditText
+            android:id="@+id/et_firstname_signup_oa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints="true"
+            android:digits="@string/characters"
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="7dp"
+            android:hint="@string/firstnames"
+            android:imeOptions="flagNoFullscreen|actionNext"
+            android:inputType="textPersonName"
+            android:textColor="@color/base_black"
+            android:textColorHint="@color/base_gray"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/et_lastname_signup_oa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mcv_section_photo" />
+
+        <EditText
+            android:id="@+id/et_lastname_signup_oa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:autofillHints="true"
+            android:digits="@string/characters"
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:drawablePadding="7dp"
+            android:hint="@string/lastnames"
+            android:imeOptions="flagNoFullscreen|actionNext"
+            android:inputType="textPersonName"
+            android:textColor="@color/base_black"
+            android:textColorHint="@color/base_gray"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/et_email_signup_oa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_firstname_signup_oa" />
+
+        <EditText
+            android:id="@+id/et_email_signup_oa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:autofillHints="true"
+            android:drawableStart="@drawable/ic_outline_email_24"
+            android:drawablePadding="7dp"
+            android:hint="@string/email"
+            android:imeOptions="flagNoFullscreen|actionNext"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/base_black"
+            android:textColorHint="@color/base_gray"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/et_phone_signup_oa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_lastname_signup_oa" />
+
+        <EditText
+            android:id="@+id/et_phone_signup_oa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:drawableStart="@drawable/ic_outline_smartphone_24"
+            android:drawablePadding="7dp"
+            android:enabled="false"
+            android:hint="@string/phone"
+            android:imeOptions="flagNoFullscreen|actionNext|actionPrevious"
+            android:inputType="phone"
+            android:textColor="@color/base_black"
+            android:textColorHint="@color/base_gray"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_email_signup_oa" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_signup_oa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="15dp"
+            android:drawableLeft="@drawable/ic_baseline_done_24"
+            android:drawableTint="@color/base_white"
+            android:imeOptions="actionDone"
+            android:padding="10dp"
+            android:text="Finalizar"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:backgroundTint="@color/base_black_mate"
+            app:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_phone_signup_oa"
+            app:rippleColor="@color/base_lightbrown"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

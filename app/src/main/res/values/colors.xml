@@ -13,6 +13,7 @@
     <color name="base_white">#E9E9E9</color>
     <color name="base_lightgray">#B5BDC6</color>
     <color name="base_black">#0E0D0D</color>
+    <color name="base_black_mate">#3C3C3C</color>
     <color name="base_darkgray">#E9E9E9</color>
     <color name="base_brown">#59372F</color>
     <color name="base_lightbrown">#986356</color>

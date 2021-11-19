@@ -29,4 +29,19 @@
     <string name="positive_button_login_dialog">Iniciar sesión</string>
     <string name="negative_button_login_dialog">Más tarde</string>
 
+    <!-- DIALOG WAIT -->
+    <string name="title_wait_dialog">Espere</string>
+    <string name="message_wait_dialog">Un momento...</string>
+    <string name="message_validate_dialog">Validando...</string>
+    <string name="message_register_dialog">Registrando...</string>
+
+    <!-- USER SIGN UP -->
+    <string name="firstnames">Nombres</string>
+    <string name="lastnames">Apellidos</string>
+    <string name="choosePhotoProfile">Elegir Foto</string>
+    <string name="email">Correo electrónico</string>
+    <string name="phone">Número de celular</string>
+
+    <string name="characters">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÁáÂâÃãÀàÇçÉéÊêÍíÓóÔôÕõÚú</string>
+
 </resources>

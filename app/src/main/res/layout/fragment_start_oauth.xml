@@ -18,7 +18,7 @@
         android:text="Iniciar"
         android:textAllCaps="false"
         android:textSize="16sp"
-        app:backgroundTint="@color/base_brown"
+        app:backgroundTint="@color/base_black_mate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:rippleColor="@color/base_lightbrown"

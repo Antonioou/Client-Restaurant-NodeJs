@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.ntncode.restaurantclient.model.UserData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -17,20 +18,21 @@ class UserDataStore(private val context: Context) {
 
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = USER_DATASTORE)
 
-        val LASTNAME = stringPreferencesKey("LASTNAME")
         val FIRSTNAME = stringPreferencesKey("FIRSTNAME")
+        val LASTNAME = stringPreferencesKey("LASTNAME")
         val PHONE_NUMBER = stringPreferencesKey("PHONE_NUMBER")
         val UID = stringPreferencesKey("UID")
     }
 
     // ************************ SET METHODS ***********************************
 
-    suspend fun setUser(firstname: String, lastname: String, uid: String) {
+    suspend fun setData(list: UserData) {
         context.dataStore.edit {
             it.clear()
-            it[FIRSTNAME] = firstname
-            it[LASTNAME] = lastname
-            it[UID] = uid
+            it[FIRSTNAME] = list.firstName
+            it[LASTNAME] = list.lastName
+            it[PHONE_NUMBER] = list.phone
+            it[UID] = list.uid
         }
     }
 
@@ -43,8 +45,8 @@ class UserDataStore(private val context: Context) {
 
     // ************************ GET METHODS ***********************************
 
-    val getUserAllData: Flow<UserDSModel> = context.dataStore.data.map {
-        UserDSModel(
+    val getData: Flow<UserData> = context.dataStore.data.map {
+        UserData(
             firstName = it[FIRSTNAME] ?: "",
             lastName = it[LASTNAME] ?: "",
             phone = it[PHONE_NUMBER] ?: "",
