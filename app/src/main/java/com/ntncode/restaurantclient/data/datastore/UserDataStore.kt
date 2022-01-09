@@ -8,9 +8,10 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.ntncode.restaurantclient.model.UserData
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
-class UserDataStore(private val context: Context) {
+class   UserDataStore(private val context: Context) {
 
     companion object {
 
@@ -81,12 +82,12 @@ class UserDataStore(private val context: Context) {
             uid = it[UID] ?: ""
         )
     }
-
-    suspend fun getFirstName(): String? {
+*/
+    suspend fun getFirstNameLL(): String? {
         val preferences: Preferences = context.dataStore.data.first()
         return preferences[FIRSTNAME]
     }
-
+/*
     suspend fun getPhoneNumber(): String? {
         val preferences: Preferences = context.dataStore.data.first()
         return preferences[PHONE_NUMBER]

@@ -1,148 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".view.home.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_height="match_parent">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_cart_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_outline_shopping_cart_24"
-            app:backgroundTint="@color/white"
-            app:elevation="0dp"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toBottomOf="@id/iv_profile_home"
-            app:layout_constraintEnd_toStartOf="@id/iv_profile_home"
-            app:layout_constraintTop_toTopOf="@id/iv_profile_home" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_profile_home"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
-            android:background="@color/base_black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize25Percent" />
-
-        <TextView
-            android:id="@+id/tv_name_customer_home"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Hola, Carlos"
-            android:textColor="@color/base_gray"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@id/fab_cart_home"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_messagewelcome_home"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="¡Elige tus productos!"
-            android:textColor="@color/base_black"
-            android:textSize="19sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/fab_cart_home"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_name_customer_home" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/mcv_action_search_home"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="30dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_messagewelcome_home"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.SelectedCornerRadius20TRABL"
-            app:strokeColor="@color/base_lightgray"
-            app:strokeWidth="1dp">
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_cart_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_outline_shopping_cart_24"
+                android:visibility="gone"
+                app:backgroundTint="@color/white"
+                app:elevation="0dp"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="@id/iv_profile_home"
+                app:layout_constraintEnd_toStartOf="@id/iv_profile_home"
+                app:layout_constraintTop_toTopOf="@id/iv_profile_home" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_profile_home"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/base_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize25Percent" />
 
             <TextView
+                android:id="@+id/tv_name_customer_home"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/base_gray"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toStartOf="@id/fab_cart_home"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_messagewelcome_home"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="¡Elige tus productos!"
+                android:textColor="@color/base_black"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/mcv_action_search_home"
+                app:layout_constraintEnd_toStartOf="@id/fab_cart_home"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_name_customer_home" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv_action_search_home"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:drawablePadding="5dp"
-                android:gravity="center_vertical"
-                android:text="Buscar"
-                android:textColor="@color/base_lightgray"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/ic_baseline_search_24"
-                app:drawableTint="@color/base_lightgray" />
-        </com.google.android.material.card.MaterialCardView>
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="30dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_messagewelcome_home"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.SelectedCornerRadius20TRABL"
+                app:strokeColor="@color/base_lightgray"
+                app:strokeWidth="1dp">
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/feb_favorites_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/base_white"
-            android:textAllCaps="false"
-            app:icon="@drawable/ic_outline_shopping_cart_24"
-            app:iconTint="@color/base_white"
-            app:backgroundTint="@color/base_black"
-            app:rippleColor="@color/base_brown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/feb_order_home"
-            app:layout_constraintTop_toBottomOf="@id/mcv_action_search_home"
-            android:text="Favoritos"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text="Buscar"
+                    android:textColor="@color/base_lightgray"
+                    android:textSize="16sp"
+                    app:drawableStartCompat="@drawable/ic_baseline_search_24"
+                    app:drawableTint="@color/base_lightgray" />
+            </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/feb_order_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/base_white"
-            android:textAllCaps="false"
-            app:icon="@drawable/ic_outline_shopping_cart_24"
-            app:iconTint="@color/base_white"
-            app:backgroundTint="@color/base_black"
-            app:rippleColor="@color/base_brown"
-            app:layout_constraintStart_toEndOf="@id/feb_favorites_home"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mcv_action_search_home"
-            android:text="Pedidos"/>
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/feb_favorites_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Favoritos"
+                android:textAllCaps="false"
+                android:textColor="@color/base_white"
+                app:backgroundTint="@color/base_black"
+                app:icon="@drawable/ic_outline_shopping_cart_24"
+                app:iconTint="@color/base_white"
+                app:layout_constraintEnd_toStartOf="@id/feb_order_home"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mcv_action_search_home"
+                app:rippleColor="@color/base_brown" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_itemslist_home"
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/feb_order_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Pedidos"
+                android:textAllCaps="false"
+                android:textColor="@color/base_white"
+                app:backgroundTint="@color/base_black"
+                app:icon="@drawable/ic_outline_shopping_cart_24"
+                app:iconTint="@color/base_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/feb_favorites_home"
+                app:layout_constraintTop_toBottomOf="@id/mcv_action_search_home"
+                app:rippleColor="@color/base_brown" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_itemslist_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/feb_favorites_home" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_itemshortlist_home"
+                android:layout_width="match_parent"
+                android:layout_marginStart="35dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_itemslist_home"
+
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_itemshortlist_home"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="15dp"
+        app:contentPadding="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.SelectedCornerRadius20TL"
+        app:strokeColor="@color/base_black_mate"
+        app:strokeWidth="0.3dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:paddingBottom="5dp"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/feb_favorites_home" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvQtyPreviewCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="0"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/base_black_mate"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/ivIconPreviewCart"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"
+                android:src="@drawable/ic_outline_shopping_cart_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvQtyPreviewCart"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-</androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

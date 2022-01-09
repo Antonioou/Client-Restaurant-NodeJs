@@ -216,7 +216,7 @@ class ValidateOAFragment : Fragment() {
 
         dialogValidateData = LoadStyleAlertDialog(
             requireContext(),
-            false
+            true
         ).apply {
             set(
                 message = getString(R.string.message_validate_dialog)

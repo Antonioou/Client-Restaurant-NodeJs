@@ -2,6 +2,7 @@ package com.ntncode.restaurantclient.api
 
 import com.ntncode.restaurantclient.model.CustomerResponse
 import com.ntncode.restaurantclient.model.ItemData
+import com.ntncode.restaurantclient.model.ItemResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -30,6 +31,9 @@ interface ApiInterface {
 
     @GET("/api/item/list/{limit}")
     fun getItemList(@Query("limit") limit: Int): Call<List<ItemData>>
+
+    @GET("/api/item/{itemId}")
+    fun getItemDetailByID(@Query("itemId") idItem: String): Call<List<ItemResponse>>
 
 
 }

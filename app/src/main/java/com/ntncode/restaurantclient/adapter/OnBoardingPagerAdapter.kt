@@ -43,7 +43,7 @@ class OnBoardingPagerAdapter(
         val animFade: Animation =
             TranslateAnimation(0F, 0f, -80f, 0f)
         animFade.duration = 1600
-        //animFade.repeatMode = Animation.RESTART
+        //animFade.re<peatMode = Animation.RESTART
         //animFade.repeatCount = Animation.INFINITE
 
         holder.bind(title, msg, text_icon, icon, animFade, context, position)

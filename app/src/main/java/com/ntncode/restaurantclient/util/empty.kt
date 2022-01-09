@@ -56,4 +56,50 @@ lifecycleScope.launch {
     }*/
 
 }
+
+private fun setImage() {
+        var shareTarget: Target?
+        shareTarget = object : Target {
+            override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom?) {
+
+                binding.ivImageItemDetail.setImageBitmap(bitmap)
+                Palette.from(bitmap)
+                    .generate {
+
+                        if (it != null) {
+                            it.darkVibrantSwatch?.rgb?.let { it1 ->
+                                binding.mcvContentItemDetail.setCardBackgroundColor(
+                                    it1
+                                )
+                            }
+
+                            it.vibrantSwatch?.bodyTextColor?.let { it1 ->
+                                binding.tvNameItemDetail.setTextColor(
+                                    it1
+                                )
+                            }
+                        }
+                    }
+
+
+                //shareTarget = null
+
+            }
+
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
+            override fun onBitmapFailed(e: java.lang.Exception?, errorDrawable: Drawable?) {
+                // don't need to store it any longer
+                shareTarget = null
+            }
+        }
+
+
+        Picasso.get()
+            .load("https://source.unsplash.com/random")
+            //.centerCrop()
+            .networkPolicy(NetworkPolicy.NO_CACHE)
+            .into(shareTarget as Target)
+    }
+
  */
+

@@ -1,5 +1,6 @@
 package com.ntncode.restaurantclient.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,49 +8,67 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ntncode.restaurantclient.R
+import com.ntncode.restaurantclient.`interface`.ItemClickListener
 import com.ntncode.restaurantclient.model.ItemData
+import com.squareup.picasso.NetworkPolicy
+import com.squareup.picasso.Picasso
 
-class ItemListOneDesignAdapter(private val mList: List<ItemData>) :
-    RecyclerView.Adapter<ItemListOneDesignAdapter.ViewHolder>() {
+class ItemListOneDesignAdapter() : RecyclerView.Adapter<ItemListOneDesignAdapter.ViewHolder>() {
 
-    // create new views
+    var mList = mutableListOf<ItemData>()
+
+    private var clickListener: ItemClickListener.ListClickListener<ItemData>? = null
+
+    fun setItems(items: List<ItemData>) {
+        this.mList = items.toMutableList()
+        notifyDataSetChanged()
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-        // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_product_one_design, parent, false)
-
         return ViewHolder(view)
     }
 
-    // binds the list items to a view
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val ItemsViewModel = mList[position]
+        val item = mList[position]
 
-        // sets the image to the imageview from our itemHolder class
+        holder.tv_name.text = item.name_item
+        holder.tv_cost.text = "S/. ${item.price_detail_item}"
 
-        /*Picasso.get()
-            .load(ItemsViewModel.image_item)
-            .centerCrop()
-            .into(holder.imageView)*/
+        Picasso.get()
+            .load(item.image_item)
+            .networkPolicy(NetworkPolicy.NO_CACHE)
+            .into(holder.imageView)
 
-        // sets the text to the textview from our itemHolder class
+        holder.itemView.setOnClickListener {
+            clickListener?.onClick(item, position)
+        }
 
-        holder.tv_name.text = ItemsViewModel.name_item
-        holder.tv_cost.text = "S/. "+ItemsViewModel.price_detail_item.toString()
+        /*holder.imgDelete.setOnClickListener {
+            clickListener?.onDelete(user)
+        }*/
 
     }
 
-    // return the number of the items in the list
+    fun setOnItemClick(onClickListener: ItemClickListener.ListClickListener<ItemData>) {
+        this.clickListener = onClickListener
+    }
+
     override fun getItemCount(): Int {
         return mList.size
     }
 
-    // Holds the views for adding it to image and text
-    class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         val imageView: ImageView = itemView.findViewById(R.id.iv_image_prodonedesign)
         val tv_name: TextView = itemView.findViewById(R.id.tv_name_prodonedesign)
         val tv_cost: TextView = itemView.findViewById(R.id.tv_cost_prodonedesign)
     }
 }
+
+
+

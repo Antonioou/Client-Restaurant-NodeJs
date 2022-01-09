@@ -36,6 +36,11 @@
         <item name="cornerSize">10%</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.App.SelectedCornerRadius20TL" parent="">
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+    </style>
+
     <style name="ShapeAppearanceOverlay.App.SelectedCornerRadius20TRABL" parent="">
         <item name="cornerSizeTopRight">20dp</item>
         <item name="cornerFamilyTopRight">rounded</item>
